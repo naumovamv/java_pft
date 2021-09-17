@@ -42,10 +42,6 @@ public class ApplicationManager {
     wd.quit();
   }
 
-  public void closeAlertBox() {
-    wd.switchTo().alert().accept();
-  }
-
   public GroupHelper getGroupHelper() {
     return groupHelper;
   }
@@ -54,7 +50,5 @@ public class ApplicationManager {
     return navigationHelper;
   }
 
-  public ContactHelper getContactHelper() {
-    return contactHelper;
-  }
+  public ContactHelper getContactHelper() {     return contactHelper; }
 }

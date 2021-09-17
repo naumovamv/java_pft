@@ -1,21 +1,14 @@
 package ru.stqa.pft.addressbook.appmanager;
 
-import com.sun.org.apache.bcel.internal.Const;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
-import ru.stqa.pft.addressbook.model.GroupData;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Stream;
-
-import static javafx.collections.FXCollections.concat;
 
 public class ContactHelper extends HelperBase {
 
@@ -60,6 +53,7 @@ public class ContactHelper extends HelperBase {
 
   public void deleteSelectContact() {
     click(By.xpath("//input[@value='Delete']"));
+    closeAlertBox();
   }
 
   public void selectContact(int index) {
@@ -91,14 +85,14 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElement(By.id("maintable")).findElements(By.tagName("tr"));
-
+    List<WebElement> elements = wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr/following-sibling::tr"));
     for (WebElement element : elements) {
-      WebElement lastnameselement = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr[element]/td[2]"));
-      WebElement firstnameselement = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr[element]/td[3]"));
+      WebElement lastnameselement = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr/following-sibling::tr/td[2]"));
+      WebElement firstnameselement = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr/following-sibling::tr/td[3]"));
       String lastname = lastnameselement.getText();
       String firstname = firstnameselement.getText();
-      ContactData contact = new ContactData(firstname, lastname, null, null, null, null);
+      int id = Integer.parseInt(element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr/following-sibling::tr/td[1]/input")).getAttribute("value"));
+      ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;
