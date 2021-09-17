@@ -17,7 +17,7 @@ public class ContactData {
     this.email = email;
   }
 
-  public String getFirstname() {
+    public String getFirstname() {
     return firstname;
   }
 
