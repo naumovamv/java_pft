@@ -85,19 +85,21 @@ public class ContactHelper extends HelperBase {
 
   public List<ContactData> getContactList() {
     List<ContactData> contacts = new ArrayList<ContactData>();
-    List<WebElement> elements = wd.findElements(By.xpath("//*[@id=\"maintable\"]/tbody/tr/following-sibling::tr"));
+    List<WebElement> elements = wd.findElements(By.name("entry"));
     for (WebElement element : elements) {
-      WebElement lastnameselement = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr/following-sibling::tr/td[2]"));
-      WebElement firstnameselement = element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr/following-sibling::tr/td[3]"));
-      String lastname = lastnameselement.getText();
-      String firstname = firstnameselement.getText();
-      int id = Integer.parseInt(element.findElement(By.xpath("//*[@id=\"maintable\"]/tbody/tr/following-sibling::tr/td[1]/input")).getAttribute("value"));
+     List<WebElement> cells = element.findElements(By.tagName("td"));
+      String lastname = cells.get(1).getText();
+      String firstname =  cells.get(2).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
       ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null);
       contacts.add(contact);
     }
     return contacts;
   }
-}
 
+  public void selectModificationContact(int index) {
+    wd.findElements(By.xpath("//img[@alt='Edit']")).get(index).click();
+  }
+}
 
 
