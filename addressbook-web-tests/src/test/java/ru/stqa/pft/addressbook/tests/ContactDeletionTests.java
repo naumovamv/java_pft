@@ -13,7 +13,7 @@ public class ContactDeletionTests extends TestBase {
   public void ensurePreconditions() {
     app.goTo().HomePage();
     if (app.contact().list().size() == 0) {
-      app.contact().create(new ContactData("Test", "Test", "Saint-Petersburg", "+71111111111", "test@test.ru", "test1"), true);
+      app.contact().create(new ContactData().withFirstname("Test").withLastname("Test"), true);
     }
   }
 

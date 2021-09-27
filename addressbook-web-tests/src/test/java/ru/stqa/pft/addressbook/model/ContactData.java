@@ -3,33 +3,13 @@ package ru.stqa.pft.addressbook.model;
 import java.util.Objects;
 
 public class ContactData {
-  private int id;
-  private final String firstname;
-  private final String lastname;
-  private final String group;
-  private final String address;
-  private final String mobile;
-  private final String email;
-
-  public ContactData(String firstname, String lastname, String address, String mobile, String email, String group) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.group = group;
-    this.address = address;
-    this.mobile = mobile;
-    this.email = email;
-  }
-
-  public ContactData(int id, String firstname, String lastname, String address, String mobile, String email, String group) {
-    this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.group = group;
-    this.address = address;
-    this.mobile = mobile;
-    this.email = email;
-  }
+  private int id = Integer.MAX_VALUE;
+  private String firstname;
+  private String lastname;
+  private String group;
+  private String address;
+  private String mobile;
+  private String email;
 
   @Override
   public String toString() {
@@ -42,29 +22,62 @@ public class ContactData {
 
   public int getId() { return id; }
 
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
+  }
+
   public String getFirstname() {
     return firstname;
+  }
+
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
   }
 
   public String getLastname() {
     return lastname;
   }
 
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
   public String getGroup() {  return group; }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
 
   public String getAddress() {
     return address;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
   }
 
   public String getMobile() {
     return mobile;
   }
 
+  public ContactData withMobile(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
   public String getEmail() {
     return email;
   }
 
-  public void setId(int id) {  this.id = id; }
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+  }
 
   @Override
   public boolean equals(Object o) {
