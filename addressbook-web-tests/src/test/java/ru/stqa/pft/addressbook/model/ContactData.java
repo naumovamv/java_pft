@@ -13,6 +13,17 @@ public class ContactData {
   private String workPhone;
   private String email;
 
+  public String getAllPhones() {
+    return allPhones;
+  }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+  private String allPhones;
+
   @Override
   public String toString() {
     return "ContactData{" +
