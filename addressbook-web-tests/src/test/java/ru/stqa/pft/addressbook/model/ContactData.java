@@ -8,7 +8,9 @@ public class ContactData {
   private String lastname;
   private String group;
   private String address;
-  private String mobile;
+  private String mobilePhone;
+  private String homePhone;
+  private String workPhone;
   private String email;
 
   @Override
@@ -17,6 +19,9 @@ public class ContactData {
             "id=" + id +
             ", firstname='" + firstname + '\'' +
             ", lastname='" + lastname + '\'' +
+            ", mobilePhone='" + mobilePhone + '\'' +
+            ", homePhone='" + homePhone + '\'' +
+            ", workPhone='" + workPhone + '\'' +
             '}';
   }
 
@@ -61,14 +66,27 @@ public class ContactData {
     return this;
   }
 
-  public String getMobile() {
-    return mobile;
+  public String getMobilePhone() {
+    return mobilePhone;
   }
 
-  public ContactData withMobile(String mobile) {
-    this.mobile = mobile;
+  public ContactData withMobilePhone(String mobile) {
+    this.mobilePhone = mobile;
     return this;
   }
+
+  public String getHomePhone() { return homePhone;  }
+  public ContactData withHomePhone(String home) {
+    this.homePhone = home;
+    return this;
+  }
+
+  public String getWorkPhone() { return workPhone; }
+  public ContactData withWorkPhone(String work) {
+    this.workPhone = work;
+    return this;
+  }
+
 
   public String getEmail() {
     return email;
@@ -84,11 +102,11 @@ public class ContactData {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ContactData that = (ContactData) o;
-    return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname);
+    return id == that.id && Objects.equals(firstname, that.firstname) && Objects.equals(lastname, that.lastname) && Objects.equals(mobilePhone, that.mobilePhone) && Objects.equals(homePhone, that.homePhone) && Objects.equals(workPhone, that.workPhone);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, firstname, lastname);
+    return Objects.hash(id, firstname, lastname, mobilePhone, homePhone, workPhone);
   }
 }
