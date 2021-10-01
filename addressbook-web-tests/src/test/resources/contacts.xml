@@ -1,0 +1,35 @@
+<list>
+  <contact>
+    <firstname>firstname 0</firstname>
+    <lastname>lastname 0</lastname>
+    <address>address 0</address>
+    <mobilePhone>+78213334444 0</mobilePhone>
+    <homePhone>+78213334444 0</homePhone>
+    <workPhone>+78213334444 0</workPhone>
+    <email>test@test.ru 0</email>
+    <email2>test2@test.ru 0</email2>
+    <email3>test3@test.ru 0</email3>
+  </contact>
+  <contact>
+    <firstname>firstname 1</firstname>
+    <lastname>lastname 1</lastname>
+    <address>address 1</address>
+    <mobilePhone>+78213334444 1</mobilePhone>
+    <homePhone>+78213334444 1</homePhone>
+    <workPhone>+78213334444 1</workPhone>
+    <email>test@test.ru 1</email>
+    <email2>test2@test.ru 1</email2>
+    <email3>test3@test.ru 1</email3>
+  </contact>
+  <contact>
+    <firstname>firstname 2</firstname>
+    <lastname>lastname 2</lastname>
+    <address>address 2</address>
+    <mobilePhone>+78213334444 2</mobilePhone>
+    <homePhone>+78213334444 2</homePhone>
+    <workPhone>+78213334444 2</workPhone>
+    <email>test@test.ru 2</email>
+    <email2>test2@test.ru 2</email2>
+    <email3>test3@test.ru 2</email3>
+  </contact>
+</list>
