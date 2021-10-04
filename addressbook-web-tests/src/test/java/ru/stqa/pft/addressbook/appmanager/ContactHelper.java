@@ -25,26 +25,24 @@ public class ContactHelper extends HelperBase {
   }
 
   public void fillContactForm(ContactData contactData, boolean creation) {
-    click(By.name("firstname"));
+
     type(By.name("firstname"), contactData.getFirstname());
-    click(By.xpath("//div[@id='content']/form/label[3]"));
-    click(By.name("lastname"));
     type(By.name("lastname"), contactData.getLastname());
-    click(By.name("address"));
     type(By.name("address"), contactData.getAddress());
-    click(By.xpath("//div[@id='content']/form/label[9]"));
-    click(By.name("home"));
-    click(By.name("mobile"));
+    type(By.name("home"),contactData.getHomePhone());
     type(By.name("mobile"), contactData.getMobilePhone());
-    click(By.name("email"));
-    type(By.name("email"), contactData.getEmail());
+    type(By.name("work"), contactData.getWorkPhone());
+    type(By.name("email"),contactData.getEmail());
+    type(By.name("email2"), contactData.getEmail2());
+    type(By.name("email3"), contactData.getEmail3());
     attach(By.name("photo"), contactData.getPhoto());
 
 
+
     if (creation) {
-      new Select(wd.findElement(By.xpath("//select[@name='new_group']"))).selectByVisibleText(contactData.getGroup());
+    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
-      Assert.assertFalse(isElementPresent(By.xpath("//select[@name='new_group']")));
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
   }
 
