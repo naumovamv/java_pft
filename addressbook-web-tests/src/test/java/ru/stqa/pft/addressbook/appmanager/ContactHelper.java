@@ -121,7 +121,7 @@ public class ContactHelper extends HelperBase {
               .withAddress(address)
               .withAllPhones(allPhones)
               .withAllEmails(allEmails)
-              .withGroup("test1"));
+              .withGroup("test 0"));
     }
     return new Contacts(contactCache);
     }
