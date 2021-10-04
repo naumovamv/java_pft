@@ -1,3 +1,3 @@
-firstname 0;lastname 0;test 0;address 0;+78213334444 0,+78213334444 0;+78213334444 0;test@test.ru 0;test2@test.ru 0;test3@test.ru 0
-firstname 1;lastname 1;test 0;address 1;+78213334444 1,+78213334444 1;+78213334444 1;test@test.ru 1;test2@test.ru 1;test3@test.ru 1
-firstname 2;lastname 2;test 0;address 2;+78213334444 2,+78213334444 2;+78213334444 2;test@test.ru 2;test2@test.ru 2;test3@test.ru 2
+firstname 0;lastname 0;address 0;+78213334444 0;+78213334444 0
+firstname 1;lastname 1;address 1;+78213334444 1;+78213334444 1
+firstname 2;lastname 2;address 2;+78213334444 2;+78213334444 2
