@@ -2,6 +2,7 @@
   <contact>
     <firstname>firstname 0</firstname>
     <lastname>lastname 0</lastname>
+    <group>test 0</group>
     <address>address 0</address>
     <mobilePhone>+78213334444 0</mobilePhone>
     <homePhone>+78213334444 0</homePhone>
@@ -13,6 +14,7 @@
   <contact>
     <firstname>firstname 1</firstname>
     <lastname>lastname 1</lastname>
+    <group>test 0</group>
     <address>address 1</address>
     <mobilePhone>+78213334444 1</mobilePhone>
     <homePhone>+78213334444 1</homePhone>
@@ -24,6 +26,7 @@
   <contact>
     <firstname>firstname 2</firstname>
     <lastname>lastname 2</lastname>
+    <group>test 0</group>
     <address>address 2</address>
     <mobilePhone>+78213334444 2</mobilePhone>
     <homePhone>+78213334444 2</homePhone>
