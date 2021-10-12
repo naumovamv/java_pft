@@ -19,6 +19,12 @@ public class ContactHelper extends HelperBase {
   public void returnToContactPage() {
     click(By.linkText("home page"));
   }
+  public void goToHomePage() {
+    if (isElementPresent(By.id("maintable"))) {
+      return;
+    }
+    click(By.linkText("home"));
+  }
 
   public void submitContactCreation() {
     click(By.xpath("//div[@id='content']/form/input[21]"));
@@ -29,18 +35,20 @@ public class ContactHelper extends HelperBase {
     type(By.name("firstname"), contactData.getFirstname());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("address"), contactData.getAddress());
-    type(By.name("home"),contactData.getHomePhone());
+    type(By.name("home"), contactData.getHomePhone());
     type(By.name("mobile"), contactData.getMobilePhone());
     type(By.name("work"), contactData.getWorkPhone());
-    type(By.name("email"),contactData.getEmail());
+    type(By.name("email"), contactData.getEmail());
     type(By.name("email2"), contactData.getEmail2());
     type(By.name("email3"), contactData.getEmail3());
-    attach(By.name("photo"), contactData.getPhoto());
-
-
+    //attach(By.name("photo"), contactData.getPhoto());
 
     if (creation) {
-    new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+      if (contactData.getGroups().size() > 0) {
+        Assert.assertTrue(contactData.getGroups().size() == 1);
+        new Select(wd.findElement(By.name("new_group")))
+                .selectByVisibleText(contactData.getGroups().iterator().next().getName());
+      }
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -72,7 +80,7 @@ public class ContactHelper extends HelperBase {
     fillContactForm(contact, creation);
     submitContactCreation();
     contactCache = null;
-    returnToContactPage();
+    goToHomePage();
   }
 
   public void modify(ContactData contact) {
@@ -120,8 +128,8 @@ public class ContactHelper extends HelperBase {
               .withLastname(lastname)
               .withAddress(address)
               .withAllPhones(allPhones)
-              .withAllEmails(allEmails)
-              .withGroup("test 0"));
+              .withAllEmails(allEmails));
+              //.withGroup("test 0"));
     }
     return new Contacts(contactCache);
     }
