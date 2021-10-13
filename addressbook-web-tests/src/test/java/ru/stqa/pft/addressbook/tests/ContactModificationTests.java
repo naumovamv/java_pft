@@ -43,5 +43,6 @@ public void ensurePreconditions() {
     Contacts after = app.db().contacts();
     assertEquals(after.size(), before.size());
     assertThat(after, equalTo(before.withoutAdded(modifiedContact).withAdded(contact)));
+    verifyContactListInUI();
   }
 }
