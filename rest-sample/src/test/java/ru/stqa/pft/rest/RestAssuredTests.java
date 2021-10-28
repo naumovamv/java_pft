@@ -12,13 +12,13 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.Set;
 
-public class RestAssuredTests {
+public class RestAssuredTests extends TestBase{
 
   @BeforeClass
   public void init(){
     RestAssured.authentication = RestAssured.basic("288f44776e7bec4bf44fdfeb1e646490", "");
   }
-  
+
   @Test
   public void testCreateIssue() throws IOException {
     Set<Issue> oldIssues = getIssues();

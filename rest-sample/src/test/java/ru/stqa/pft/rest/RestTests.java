@@ -16,7 +16,7 @@ import java.util.Set;
 import static org.testng.Assert.assertEquals;
 import static org.testng.internal.thread.ThreadUtil.execute;
 
-public class RestTests  {
+public class RestTests extends TestBase {
 
   @Test
   public void testCreateIssue() throws IOException {
