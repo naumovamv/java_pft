@@ -20,9 +20,9 @@ public class AddContactToGroupTest extends TestBase {
   public void ensurePreconditions() {
 
     if (app.db().groups().size() == 0) {
-        app.goTo().GroupPage();
-        app.group().create(new GroupData().withName("test 0").withFooter("test 0").withHeader("test 0"));
-      }
+      app.goTo().GroupPage();
+      app.group().create(new GroupData().withName("test 0").withFooter("test 0").withHeader("test 0"));
+    }
     if (app.db().contacts().size() == 0) {
       app.goTo().HomePage();
       app.contact().create(new ContactData().withFirstname("Test 0").withLastname("Test 0").withAddress("Saint-Petersburg").withHomePhone("+78125554433")
@@ -32,23 +32,35 @@ public class AddContactToGroupTest extends TestBase {
 
   @Test
   public void testAddContactToGroup() {
-
-    Contacts before = app.db().contacts();
+    Contacts contacts = app.db().contacts();
     Groups groups = app.db().groups();
     GroupData groupAdd = new GroupData();
-    ContactData modifiedContact = before.iterator().next();
-    Set<GroupData> contactGroupsBefor = modifiedContact.getGroups();
-    for (GroupData group: groups) {
-      if (!contactGroupsBefor.contains(group)) {
-        groupAdd =  group;
-        break;
+    ContactData modifiedContact = new ContactData();
+    for (ContactData contact : contacts) {
+      Set<GroupData> contactGroupsBefor = contact.getGroups();
+      for (GroupData group : groups) {
+        if (!contactGroupsBefor.contains(group)) {
+          groupAdd = group;
+          modifiedContact = contact;
+          break;
+        }
       }
     }
+    if (groupAdd.getName() == null){
+      app.goTo().GroupPage();
+      groupAdd = new GroupData().withName("testgroup").withFooter("testgroup").withHeader("testgroup");
+      app.group().create(groupAdd);
+      ContactData anymodifiedContact = contacts.iterator().next();
+      modifiedContact = anymodifiedContact;
+    }
+
     app.contact().goToHomePage();
     app.contact().addToGroup(modifiedContact, groupAdd);
-    assertEquals(app.contact().count(), before.size());
+    assertEquals(app.contact().count(), contacts.size());
     Set<GroupData> contactGroupsAfter = app.db().contactById(modifiedContact.getId()).getGroups();
     assertTrue(contactGroupsAfter.contains(groupAdd));
+
+    }
   }
-  }
+  
 
