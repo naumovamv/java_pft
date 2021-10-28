@@ -62,5 +62,5 @@ public class AddContactToGroupTest extends TestBase {
 
     }
   }
-  
+
 

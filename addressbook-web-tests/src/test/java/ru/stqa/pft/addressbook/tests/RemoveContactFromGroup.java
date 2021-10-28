@@ -35,29 +35,56 @@ public class RemoveContactFromGroup extends TestBase{
               .withMobilePhone("+7812343545").withWorkPhone("35354534").withEmail("test@test.ru").withEmail2("test@test.ru").withEmail3("test@test.ru"), true);
       assertThat(app.contact().count(), equalTo(before.size() + 1));
     }
-
-    Contacts before = app.db().contacts();
-    Groups groups = app.db().groups();
-    GroupData groupAdd = new GroupData();
-    ContactData modifiedContact = before.iterator().next();
-    Set<GroupData> contactGroupsBefor = modifiedContact.getGroups();
-    for (GroupData groupi : groups) {
-      if (!contactGroupsBefor.contains(groupi)) {
-        app.contact().addToGroup(modifiedContact, groupi);
-        groupAdd =  groupi;
-        break;
-      }
-      else {
-        groupAdd =  groupi;
-      }
-    }
-    assertTrue(app.db().contactById(modifiedContact.getId()).getGroups().contains(groupAdd));
   }
+
 
 
   @Test
   public void testRemoveContactFromGroup() {
+    Contacts contacts = app.db().contacts();
+    Groups groups = app.db().groups();
+    GroupData groupAdd = new GroupData();
+    ContactData modifiedContact = new ContactData();
+    for (ContactData contact : contacts) {
+      Set<GroupData> contactGroupsBefor = contact.getGroups();
+      for (GroupData group : groups) {
+        if (contactGroupsBefor.contains(group)) {
+          groupAdd = group;
+          modifiedContact = contact;
+          break;
+        }
+      }
+    }
+    if (groupAdd.getName() == null){
+      app.goTo().GroupPage();
+      groupAdd = new GroupData().withName("testgroup").withFooter("testgroup").withHeader("testgroup");
+      app.group().create(groupAdd);
+      ContactData anymodifiedContact = contacts.iterator().next();
+      modifiedContact = anymodifiedContact;
+    }
 
+    app.contact().deleteFromGroup(modifiedContact, groupAdd);
+    app.contact().goToHomePage();
+    assertThat(app.contact().count(), equalTo(contacts.size()));
+    assertFalse(app.db().contactById(modifiedContact.getId()).getGroups().contains(groupAdd));
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   /*
     Contacts before = app.db().contacts();
     Groups groups = app.db().groups();
     GroupData groupAdd = new GroupData();
@@ -74,4 +101,6 @@ public class RemoveContactFromGroup extends TestBase{
     assertThat(app.contact().count(), equalTo(before.size()));
     assertFalse(app.db().contactById(modifiedContact.getId()).getGroups().contains(groupAdd));
   }
+
+    */
 }
