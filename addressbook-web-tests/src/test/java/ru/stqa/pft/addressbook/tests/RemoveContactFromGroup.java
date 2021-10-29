@@ -13,7 +13,7 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.testng.Assert.*;
 
-public class RemoveContactFromGroup extends TestBase{
+public class RemoveContactFromGroup extends TestBase {
 
   @BeforeMethod
   public void ensurePreconditions() {
@@ -38,36 +38,37 @@ public class RemoveContactFromGroup extends TestBase{
   }
 
 
-
   @Test
   public void testRemoveContactFromGroup() {
     Contacts contacts = app.db().contacts();
     Groups groups = app.db().groups();
     GroupData groupAdd = new GroupData();
     ContactData modifiedContact = new ContactData();
+    boolean isContactAddedToGroup = false;
     for (ContactData contact : contacts) {
       Set<GroupData> contactGroupsBefor = contact.getGroups();
       for (GroupData group : groups) {
         if (contactGroupsBefor.contains(group)) {
           groupAdd = group;
           modifiedContact = contact;
+          isContactAddedToGroup = true;
           break;
         }
       }
     }
-    if (groupAdd.getName() == null){
-      app.goTo().GroupPage();
-      groupAdd = new GroupData().withName("testgroup").withFooter("testgroup").withHeader("testgroup");
-      app.group().create(groupAdd);
+    if (isContactAddedToGroup == false) {
       ContactData anymodifiedContact = contacts.iterator().next();
       modifiedContact = anymodifiedContact;
+      groupAdd = groups.iterator().next();
+      app.contact().goToHomePage();
+      app.contact().addToGroup(modifiedContact, groupAdd);
     }
 
     app.contact().deleteFromGroup(modifiedContact, groupAdd);
     app.contact().goToHomePage();
     assertThat(app.contact().count(), equalTo(contacts.size()));
     assertFalse(app.db().contactById(modifiedContact.getId()).getGroups().contains(groupAdd));
-
+    
   }
 
 
