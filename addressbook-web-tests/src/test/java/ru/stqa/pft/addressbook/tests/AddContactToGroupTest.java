@@ -32,17 +32,22 @@ public class AddContactToGroupTest extends TestBase {
 
   @Test
   public void testAddContactToGroup() {
+
     Contacts contacts = app.db().contacts();
     Groups groups = app.db().groups();
     GroupData groupAdd = new GroupData();
     ContactData modifiedContact = new ContactData();
     for (ContactData contact : contacts) {
       Set<GroupData> contactGroupsBefor = contact.getGroups();
-      for (GroupData group : groups) {
-        if (!contactGroupsBefor.contains(group)) {
-          groupAdd = group;
-          modifiedContact = contact;
-          break;
+
+      if (groups.size() != contactGroupsBefor.size()) {
+
+        for (GroupData group : groups) {
+          if (!contactGroupsBefor.contains(group)) {
+            groupAdd = group;
+            modifiedContact = contact;
+            break;
+          }
         }
       }
     }
@@ -50,6 +55,11 @@ public class AddContactToGroupTest extends TestBase {
       app.goTo().GroupPage();
       groupAdd = new GroupData().withName("testgroup").withFooter("testgroup").withHeader("testgroup");
       app.group().create(groupAdd);
+      Groups after = app.db().groups();
+      GroupData a = groupAdd.withId(after.stream().mapToInt((g) ->g.getId()).max().getAsInt());
+      groupAdd = a;
+
+
       ContactData anymodifiedContact = contacts.iterator().next();
       modifiedContact = anymodifiedContact;
     }

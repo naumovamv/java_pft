@@ -52,7 +52,8 @@ public class GroupData {
     return contacts;
   }
 
-  public int getId() { return id; }
+  public int getId() {
+    return id; }
 
   public GroupData withId(int id) {
     this.id = id;

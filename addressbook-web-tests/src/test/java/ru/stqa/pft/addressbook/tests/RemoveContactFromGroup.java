@@ -68,7 +68,7 @@ public class RemoveContactFromGroup extends TestBase {
     app.contact().goToHomePage();
     assertThat(app.contact().count(), equalTo(contacts.size()));
     assertFalse(app.db().contactById(modifiedContact.getId()).getGroups().contains(groupAdd));
-    
+
   }
 
 
